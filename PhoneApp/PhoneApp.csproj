@@ -64,9 +64,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="EmployeesLoader.Plugin.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+	<Content Include="EmployeesLoader.Plugin.dll">
+	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</Content>
+	<Content Include="EmployeesLoader.Plugin.pdb">
+	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</Content>
     <Content Include="EmployeesViewer.Plugin.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
