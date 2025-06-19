@@ -11,6 +11,7 @@ namespace PhoneApp.Domain.DTO
     public string Name { get; set; }
     public string Phone {
       get { return _phones.Any() ? _phones.LastOrDefault().Value : "-"; } 
+      set { AddPhone(value); }
     }
     public void AddPhone(string phone)
     {
