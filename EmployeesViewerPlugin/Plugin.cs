@@ -25,7 +25,7 @@ namespace EmployeesLoaderPlugin
 
       string command = "";
 
-      while(!command.ToLower().Contains("quit"))
+      while(!command.ToLower().Contains("quit") && !command.ToLower().Trim().Equals("q"))
       {
         Console.Write("> ");
         command = Console.ReadLine();
@@ -42,24 +42,25 @@ namespace EmployeesLoaderPlugin
             break;
           case "add":
             Console.Write("Name: ");
-            string name = Console.ReadLine();
+            var newEmployee = new EmployeesDTO() { Name = Console.ReadLine() };
             Console.Write("Phone: ");
-            string phone = Console.ReadLine();
-            Console.WriteLine($"{name} added to employees");
+            newEmployee.AddPhone(Console.ReadLine());
+            employeesList.Add(newEmployee);
+            Console.WriteLine($"{newEmployee.Name} added to employees");
             break;
           case "del":
-            Console.Write("Index of employee to delete: ");
-            int indexToDelete;
-            if(!Int32.TryParse(Console.ReadLine(), out indexToDelete))
-            {
+          Console.Write("Index of employee to delete: ");
+          int indexToDelete;
+          if(!Int32.TryParse(Console.ReadLine(), out indexToDelete))
+          {
               logger.Error("Not an index or not an int value!");
-            } else {
-              if(indexToDelete > 0 && indexToDelete < employeesList.Count())
-              {
-                employeesList.RemoveAt(indexToDelete);
-              }
+          } else {
+            if(indexToDelete > 0 && indexToDelete < employeesList.Count())
+            {
+               employeesList.RemoveAt(indexToDelete);
             }
-            break;
+          }
+          break;
         }
 
         Console.WriteLine("");
