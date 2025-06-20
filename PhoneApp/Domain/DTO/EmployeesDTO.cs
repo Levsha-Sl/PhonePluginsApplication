@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,11 +14,11 @@ namespace PhoneApp.Domain.DTO
       get { return _phones.Any() ? _phones.LastOrDefault().Value : "-"; } 
       set { AddPhone(value); }
     }
-    public void AddPhone(string phone)
+    private void AddPhone(string phone)
     {
       if(String.IsNullOrEmpty(phone))
       {
-        throw new Exception("Phone must be provided!");
+        throw new ArgumentNullException("Phone must be provided!");
       }
 
       _phones.Add(DateTime.Now, phone);
