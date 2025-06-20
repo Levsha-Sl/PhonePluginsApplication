@@ -70,12 +70,18 @@
 	<Content Include="EmployeesLoader.Plugin.pdb">
 	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	</Content>
-    <Content Include="EmployeesViewer.Plugin.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="EmployeesViewer.Plugin.pdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+	  <Content Include="EmployeesViewer.Plugin.dll">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="EmployeesViewer.Plugin.pdb">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="EmployessUploader.Plugin.dll">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="EmployessUploader.Plugin.pdb">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
