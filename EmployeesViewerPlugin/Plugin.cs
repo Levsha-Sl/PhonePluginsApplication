@@ -36,15 +36,24 @@ namespace EmployeesLoaderPlugin
             int index = 0;
             foreach(var employee in employeesList)
             {
-              Console.WriteLine($"{index} Name: {employee.Name} | Phone: {employee.Phone}");
+              Console.WriteLine($"{index, -3} Name: {employee.Name, -20} | Phone: {employee.Phone}");
               ++index;
             }
             break;
           case "add":
             Console.Write("Name: ");
             var newEmployee = new EmployeesDTO() { Name = Console.ReadLine() };
+            phone:
             Console.Write("Phone: ");
-            newEmployee.AddPhone(Console.ReadLine());
+            try
+            {
+              newEmployee.Phone = Console.ReadLine();
+            }
+            catch (ArgumentNullException ex)
+            {
+              Console.WriteLine(ex.Message);
+              goto phone;
+            }
             employeesList.Add(newEmployee);
             Console.WriteLine($"{newEmployee.Name} added to employees");
             break;
