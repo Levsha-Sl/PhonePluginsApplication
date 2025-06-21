@@ -19,31 +19,30 @@ namespace EmployeesLoaderPlugin
     {
       logger.Info("Starting Viewer");
       logger.Info("Type q or quit to exit");
-      logger.Info("Available commands: list, add, del");
+      logger.Info("Available commands: list, add, del, update");
 
       var employeesList = args.Cast<EmployeesDTO>().ToList();
 
       string command = "";
 
-      while(!command.ToLower().Contains("quit") && !command.ToLower().Trim().Equals("q"))
+      while (!command.ToLower().Contains("quit") && !command.ToLower().Trim().Equals("q"))
       {
         Console.Write("> ");
         command = Console.ReadLine();
 
-        switch(command)
+        switch (command)
         {
           case "list":
             int index = 0;
-            foreach(var employee in employeesList)
+            foreach (var employee in employeesList)
             {
-              Console.WriteLine($"{index, -3} Name: {employee.Name, -20} | Phone: {employee.Phone}");
+              Console.WriteLine($"{index + 1,-3} Name: {employee.Name,-20} | Phone: {employee.Phone}");
               ++index;
             }
             break;
           case "add":
             Console.Write("Name: ");
             var newEmployee = new EmployeesDTO() { Name = Console.ReadLine() };
-            phone:
             Console.Write("Phone: ");
             try
             {
@@ -52,24 +51,55 @@ namespace EmployeesLoaderPlugin
             catch (ArgumentNullException ex)
             {
               Console.WriteLine(ex.Message);
-              goto phone;
+              Console.WriteLine($"Update {newEmployee.Name}");
             }
             employeesList.Add(newEmployee);
             Console.WriteLine($"{newEmployee.Name} added to employees");
             break;
           case "del":
-          Console.Write("Index of employee to delete: ");
-          int indexToDelete;
-          if(!Int32.TryParse(Console.ReadLine(), out indexToDelete))
-          {
-              logger.Error("Not an index or not an int value!");
-          } else {
-            if(indexToDelete > 0 && indexToDelete < employeesList.Count())
+            Console.Write("Index of employee to delete: ");
+            int indexToDelete;
+            if (!Int32.TryParse(Console.ReadLine(), out indexToDelete))
             {
-               employeesList.RemoveAt(indexToDelete);
+              logger.Error("Not an index or not an int value!");
             }
-          }
-          break;
+            else
+            {
+              --indexToDelete;
+              if (indexToDelete > 0 && indexToDelete < employeesList.Count())
+              {
+                employeesList.RemoveAt(indexToDelete);
+              }
+            }
+            break;
+          case "update":
+            Console.Write("Index of employee to update: ");
+            int indexToUpdate;
+            if (!Int32.TryParse(Console.ReadLine(), out indexToUpdate))
+            {
+              logger.Error("Not an index or not an int value!");
+            }
+            else
+            {
+              --indexToUpdate;
+              if (indexToUpdate > 0 && indexToUpdate < employeesList.Count())
+              {
+                Console.Write("Name: ");
+                employeesList[indexToUpdate].Name = Console.ReadLine();
+                Console.Write("Phone: ");
+                try
+                {
+                  employeesList[indexToUpdate].Phone = Console.ReadLine();
+                }
+                catch (ArgumentNullException ex)
+                {
+                  Console.WriteLine(ex.Message);
+                  Console.WriteLine($"Update {employeesList[indexToUpdate].Name} again");
+                }
+                Console.WriteLine($"{employeesList[indexToUpdate].Name} update");
+              }
+            }
+            break;
         }
 
         Console.WriteLine("");
